@@ -1,0 +1,22 @@
+{
+  "name": "xfuture-demo-pro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "electron .",
+    "build:win32:x64": "electron-builder --win --x64 -p never",
+    "build:win32:arm64": "electron-builder --win --arm64 -p never",
+    "build:darwin:x64": "electron-builder --mac --x64 -p never",
+    "build:darwin:arm64": "electron-builder --mac --arm64 -p never"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "xfuture": "3.0.2",
+    "electron": "^25.1.1",
+    "electron-builder": "^24.13.3"
+  }
+}

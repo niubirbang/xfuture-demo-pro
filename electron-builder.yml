@@ -1,0 +1,39 @@
+appId: com.xfuture.pro.app
+productName: xfuture-demo-pro
+directories:
+  buildResources: build
+files:
+  - "!**/.vscode/*"
+asarUnpack:
+  - xfuture/**
+win:
+  artifactName: ${name}-${version}-windows-${arch}.${ext}
+  requestedExecutionLevel: highestAvailable
+  target:
+    - nsis
+nsis:
+  artifactName: ${name}-${version}-windows-${arch}.${ext}
+  uninstallDisplayName: ${productName}
+  allowToChangeInstallationDirectory: true
+  oneClick: false
+  perMachine: true
+  createDesktopShortcut: always
+mac:
+  artifactName: ${name}-${version}-macos-${arch}.${ext}
+  target:
+    - dmg
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  notarize: false
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  extendInfo:
+    - NSCameraUsageDescription: Application requests access to the device's camera.
+    - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
+    - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
+    - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
+  identity: null
+dmg:
+  sign: false
+npmRebuild: true
+publish: []

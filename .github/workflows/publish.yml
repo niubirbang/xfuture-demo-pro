@@ -1,0 +1,66 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - "publish-*"
+
+jobs:
+  macos:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest]
+        arch:
+          - x64
+          - arm64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          node build/xfuture.js
+
+      - name: Build
+        run: |
+          npm run build:darwin:${{ matrix.arch }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            dist/*.dmg
+            dist/*.pkg
+
+  windows:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+        arch:
+          - x64
+          - arm64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          node build/xfuture.js
+
+      - name: Build
+        run: |
+          npm run build:win32:${{ matrix.arch }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            dist/*.exe
