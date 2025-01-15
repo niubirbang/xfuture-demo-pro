@@ -1,11 +1,17 @@
 const path = require('path')
 const fs = require('fs')
 const { app, BrowserWindow } = require('electron')
-// const engine = require('xfuture/index')
 
 const getXfuturePath = () => {
   return path.join(__dirname, "./xfuture").replace("app.asar", "app.asar.unpacked");
 }
+
+const xfuturePackageName = {
+  'darwin-x64': 'darwin',
+  'darwin-arm64': 'darwin',
+  'win32-x64': 'win32-x64',
+  'win32-arm64': 'win32-arm64',
+}[`${process.platform}-${process.arch}`]
 
 let engine
 
@@ -14,11 +20,11 @@ const install = async () => {
   const xfutureSecret = '88991238'
   const xfutureShellPath = {
     'win32': 'maodou',
-    'darwin': path.join(xfuturePath, 'package/install_helper.sh'),
+    'darwin': path.join(xfuturePath, `package/${xfuturePackageName}/install_helper.sh`),
   }[`${process.platform}`]
   const xfutureHelperPath = {
-    'win32': path.join(xfuturePath, `package/sysproxy.exe`),
-    'darwin': path.join(xfuturePath, 'package/xsing-box-exec'),
+    'win32': path.join(xfuturePath, `package/${xfuturePackageName}/sysproxy.exe`),
+    'darwin': path.join(xfuturePath, `package/${xfuturePackageName}/xsing-box-exec`),
   }[`${process.platform}`]
   const xfutureResourcePath = path.join(xfuturePath, 'resources')
   const xfutureLogPath = path.join(app.getPath('appData'), `xfuture-demo-pro/logs`)

@@ -33,15 +33,6 @@ fs.readdirSync(path.join(xfutureDir, `/package`)).forEach((item) => {
     fs.rmSync(path.join(xfutureDir, `/package/${item}`), { recursive: true, force: true })
   }
 })
-fs.readdirSync(path.join(xfutureDir, `/package/${xfuturePackageName}`)).forEach((item) => {
-  if (item.endsWith('.node')) {
-    return
-  }
-  fs.renameSync(
-    path.join(xfutureDir, `/package/${xfuturePackageName}/${item}`),
-    path.join(xfutureDir, `/package/${item}`),
-  )
-})
 fs.readdirSync(path.join(xfutureDir, `/resources`)).forEach((item) => {
   if (!xfutureResourcesRemain(item)) {
     fs.rmSync(path.join(xfutureDir, `/resources/${item}`), { recursive: true, force: true })
