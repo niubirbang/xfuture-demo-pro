@@ -16,6 +16,12 @@ jobs:
           - arm64
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.11"
+          registry-url: https://npm.pkg.github.com/
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -46,6 +52,12 @@ jobs:
           - arm64
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.11"
+          registry-url: https://npm.pkg.github.com/
+
       - name: Checkout
         uses: actions/checkout@v4
 
