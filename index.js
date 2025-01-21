@@ -2,6 +2,8 @@ const { app, shell, BrowserWindow, ipcMain } = require('electron')
 const { join } = require('path')
 const { install, start, close, changeMode, data, quit } = require('./xfuture')
 
+app.commandLine.appendSwitch('no-sandbox')
+
 install().then(()=>{
   console.info('xfuture install success')
 }).catch(err => {
